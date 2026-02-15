@@ -5,8 +5,20 @@ const server = http.createServer((req, res)=>{
     console.log('request made')
     // set header content type
     res.setHeader('Content-Type', 'text/html')
+    let path = './';
+    switch(req.url){
+        case '/':
+            path+='index.html'
+            break
+        case '/about':
+            path+='about.html'
+            break
+        default:
+            path+='404.html'
+            break
+    }
     // rendering html pages
-    fs.readFile('./index.html', 'utf-8', (err, data)=>{
+    fs.readFile(path, 'utf-8', (err, data)=>{
         if(err){
             console.log(err)
             res.end()
